@@ -49,7 +49,7 @@ class Strategy(metaclass=ABCMeta):
     `backtesting.backtesting.Strategy.next` to define
     your own strategy.
     """
-    def __init__(self, broker, data, params):
+    def __init__(self, broker, data, **params):
         self._indicators = []
         self._broker: _Broker = broker
         self._data: _Data = data
@@ -1183,7 +1183,7 @@ class Backtest:
         """
         data = _Data(self._data.copy(deep=False))
         broker: _Broker = self._broker(data=data)
-        strategy: Strategy = self._strategy(broker, data, kwargs)
+        strategy: Strategy = self._strategy(broker, data, **kwargs)
 
         strategy.init()
         data._update()  # Strategy.init might have changed/added to data.df
@@ -1232,7 +1232,7 @@ class Backtest:
             data._set_length(len(self._data))
 
             equity = pd.Series(broker._equity).bfill().fillna(broker._cash).values
-            self._results, pl = compute_stats(
+            self._results, returns = compute_stats(
                 trades=broker.closed_trades,
                 equity=equity,
                 ohlc_data=self._data,
@@ -1240,7 +1240,7 @@ class Backtest:
                 strategy_instance=strategy,
             )
 
-        return self._results, pl
+        return self._results, returns
 
     def optimize(self, *,
                  maximize: Union[str, Callable[[pd.Series], float]] = 'SQN',
