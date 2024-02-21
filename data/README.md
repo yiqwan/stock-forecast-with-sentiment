@@ -1,0 +1,16 @@
+- BA_dedup_20231101_20240131.csv
+    - Do primitive cleaning and remove similar summaries from the same day
+- BA_soup_sel_20231101_20240131.csv
+    - Scraped soup using Selenium
+- BA_cln_20231101_20240131.csv
+    - Stores the extracted and cleaned news, ready for sentiment analysis
+- BA_stm_20231101_20240131.csv
+    - Computed sentiment scores using techniques other than Sentic
+- BA_stm_stc1_20231101_20240131.csv
+    - 1 to 3 each stores the sentiment scores for 2 out of 6 columns
+    - Refer to stc1.ipynb etc.
+- BA_score_20231101_20240131.csv
+    - Stores the raw sentiment scores of all the techniques
+- BA_merged_20231101_20240131.csv
+    - Stores the merged data between tick data and sentiment scores
+
