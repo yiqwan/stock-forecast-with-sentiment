@@ -1232,7 +1232,7 @@ class Backtest:
             data._set_length(len(self._data))
 
             equity = pd.Series(broker._equity).bfill().fillna(broker._cash).values
-            self._results = compute_stats(
+            self._results, pl = compute_stats(
                 trades=broker.closed_trades,
                 equity=equity,
                 ohlc_data=self._data,
@@ -1240,7 +1240,7 @@ class Backtest:
                 strategy_instance=strategy,
             )
 
-        return self._results
+        return self._results, pl
 
     def optimize(self, *,
                  maximize: Union[str, Callable[[pd.Series], float]] = 'SQN',
