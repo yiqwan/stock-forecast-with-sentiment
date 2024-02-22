@@ -146,7 +146,7 @@ def compute_stats(
     s.loc['_trades'] = trades_df
 
     s = _Stats(s)
-    return s, returns
+    return s
 
 
 class _Stats(pd.Series):
